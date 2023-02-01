@@ -1,19 +1,20 @@
 /*eslint-disable */
-import React, { useState } from "react";
-import Modal from "../../Components/Modal/Modal";
-import { toast } from "react-toastify";
-import "./PasswordRecover.css";
-import "react-toastify/dist/ReactToastify.css";
-import LogoutNavbar from "../../Components/Navbar/LogoutNavbar/LogoutNavbar";
-import axios from "axios";
-import "react-toastify/dist/ReactToastify.css";
-import PasswordRecover from "../../Components/RecoveryPage/PasswordRecover";
-import Login from "../../Components/Login/Login";
-import ForgotPass from "../../Components/ForgotPass/ForgotPass";
-import Signup from "../../Components/Signup/Signup";
-import resetcss from "./Rset.module.css";
-import "./PasswordRecover.css";
-import "react-toastify/dist/ReactToastify.css";
+import React, { useState } from 'react';
+import Modal from '../../Components/Modal/Modal';
+import { toast } from 'react-toastify';
+import './PasswordRecover.css';
+import 'react-toastify/dist/ReactToastify.css';
+import LogoutNavbar from '../../Components/Navbar/LogoutNavbar/LogoutNavbar';
+import axios from 'axios';
+import 'react-toastify/dist/ReactToastify.css';
+import PasswordRecover from '../../Components/RecoveryPage/PasswordRecover';
+import Login from '../../Components/Login/Login';
+import ForgotPass from '../../Components/ForgotPass/ForgotPass';
+import Signup from '../../Components/Signup/Signup';
+import resetcss from './Rset.module.css';
+import './PasswordRecover.css';
+import 'react-toastify/dist/ReactToastify.css';
+import config from '../../utils/config/config';
 
 const ResetPasswordComp = () => {
   const [openSignUpModal, setopenSignUpModal] = useState<boolean>(false);
@@ -22,17 +23,17 @@ const ResetPasswordComp = () => {
   const [showForgotModal, setShowForgotModal] = useState<boolean>(false);
   const [frgtPwdMail, setFrgtPwdMail] = useState({});
 
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const searchParams = new URLSearchParams(document.location.search);
-  const token = searchParams.get("token");
+  const token = searchParams.get('token');
 
   if (token === undefined) return null;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.name === "password") {
+    if (e.target.name === 'password') {
       setPassword(e.target.value);
-    } else if (e.target.name === "confirmPassword") {
+    } else if (e.target.name === 'confirmPassword') {
       setConfirmPassword(e.target.value);
     }
   };
@@ -57,12 +58,12 @@ const ResetPasswordComp = () => {
 
   const resetModals = (e: any) => {
     if (e?.target?.attributes?.class) {
-      e?.target?.attributes.class.value === "Modal-Area"
+      e?.target?.attributes.class.value === 'Modal-Area'
         ? [
             setShowLoginModal(false),
             setopenSignUpModal(false),
             setShowRecoveryModal(false),
-            setShowForgotModal(false),
+            setShowForgotModal(false)
           ]
         : null;
     }
@@ -72,45 +73,45 @@ const ResetPasswordComp = () => {
     e.preventDefault();
     try {
       await axios
-        .post("`${VITE_SERVER_URL}/api/user/resetpassword", {
-          email: frgtPwdMail,
+        .post(`${config.VITE_SERVER_URL}/api/user/resetpassword`, {
+          email: frgtPwdMail
         })
         .then((res) => {
           toast(res.data.message);
         });
     } catch (err: any) {
       console.log(err);
-      if (err.message === "Network Error") {
-        return toast.error("Network error");
+      if (err.message === 'Network Error') {
+        return toast.error('Network error');
       }
       toast.error(err.response.data.error);
     }
   };
 
   const toggleSignupSiginModal = (e: any) => {
-    e === "Log in" ? openLoginModal() : null;
-    e === "Sign up" ? setopenSignUpModal(true) : null;
+    e === 'Log in' ? openLoginModal() : null;
+    e === 'Sign up' ? setopenSignUpModal(true) : null;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       if (password !== confirmPassword) {
-        toast.error("Passwords do not match");
+        toast.error('Passwords do not match');
       } else {
         // send email to the route
         await axios
-          .post(``${VITE_SERVER_URL}/api/user/changepassword`, {
+          .post(`${config.VITE_SERVER_URL}/api/user/changepassword`, {
             password,
-            token,
+            token
           })
           .then((res) => {
             toast.success(res.data.message);
           });
       }
     } catch (err: any) {
-      if (err.message === "Network Error") {
-        return toast("Network error");
+      if (err.message === 'Network Error') {
+        return toast('Network error');
       }
       toast(err.response.data.error);
     }
@@ -118,19 +119,19 @@ const ResetPasswordComp = () => {
 
   return (
     <React.Fragment>
-      <div className={""}>
+      <div className={''}>
         <LogoutNavbar toggleLoginBtn={toggleSignupSiginModal} />
 
         {true && (
-          <div className={""}>
-            <span onClick={(e) => resetModals(e as unknown)} className={""}>
+          <div className={''}>
+            <span onClick={(e) => resetModals(e as unknown)} className={''}>
               <Modal closeModal={openModal}>
                 <main>
                   <>
                     <span className={resetcss.container}>
                       <div className={resetcss.form_container}>
                         <span className={resetcss.text}>
-                          Reset Your Password !{" "}
+                          Reset Your Password !{' '}
                         </span>
                       </div>
                       <div className={resetcss.custom_control_input}>
@@ -181,8 +182,8 @@ const ResetPasswordComp = () => {
         )}
         {showRecoveryModal && <PasswordRecover />}
         {openSignUpModal && (
-          <div className={""}>
-            <span onClick={(e) => resetModals(e as unknown)} className={""}>
+          <div className={''}>
+            <span onClick={(e) => resetModals(e as unknown)} className={''}>
               <Modal closeModal={openModal}>
                 <Signup onChange={onChange} openLoginModal={openLoginModal} />
               </Modal>
@@ -190,8 +191,8 @@ const ResetPasswordComp = () => {
           </div>
         )}
         {showLoginModal && (
-          <div className={""}>
-            <span onClick={(e) => resetModals(e as unknown)} className={""}>
+          <div className={''}>
+            <span onClick={(e) => resetModals(e as unknown)} className={''}>
               <Modal closeModal={openLoginModal}>
                 <Login
                   openForgotModal={openForgotModal}
@@ -203,7 +204,7 @@ const ResetPasswordComp = () => {
         )}
         {showForgotModal && (
           <div>
-            <span onClick={(e) => resetModals(e as unknown)} className={""}>
+            <span onClick={(e) => resetModals(e as unknown)} className={''}>
               <Modal closeModal={openForgotModal}>
                 <ForgotPass
                   setFrgtPwdMail={setFrgtPwdMail}

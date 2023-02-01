@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import resetcss from "./Rset.module.css";
+import config from "../../utils/config/config";
 
 const ResetPasswordPage = () => {
 	const searchParams = new URLSearchParams(document.location.search);
@@ -33,7 +34,7 @@ const ResetPasswordPage = () => {
 			} else {
 				// send email to the route
 				await axios
-					.post(``${VITE_SERVER_URL}/api/user/changepassword`, {
+					.post(`${config.VITE_SERVER_URL}/api/user/changepassword`, {
 						password,
 						token,
 					})

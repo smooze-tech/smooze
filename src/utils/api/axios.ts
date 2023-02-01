@@ -1,5 +1,7 @@
 import axios from 'axios';
-const baseUrl = '`${VITE_SERVER_URL}';
+import config from '../config/config';
+
+const baseUrl = `${config.VITE_SERVER_URL}`;
 const getToken = () => {
   return localStorage.getItem('token') || sessionStorage.getItem('token');
 };

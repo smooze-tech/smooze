@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "vite ",
-    "dev": "vite --https --open --host 127.0.0.1 --port 5173",
+    "dev": "vite --open --host 127.0.0.1 --port 5173",
     "build": "tsc && vite build",
     "format": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "preview": "vite preview",
