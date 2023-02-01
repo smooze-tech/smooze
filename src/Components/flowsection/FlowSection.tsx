@@ -28,13 +28,13 @@ const mockData = [
     bottomtext:
       'Select multiple genres and moods to create the perfect soundtrack',
     para: 'Create your own perfect soundtrack',
-    img: '/src/assets/flowsection/Flowcover2.png',
+    img: '../../assets/flowsection/Flowcover2.png',
     children: <AddIcon />
   },
   {
     bottomtext: 'Select multiple artists to create the perfect sountrack',
     para: 'Create your own concert with your favorite singers',
-    img: '/src/assets/flowsection/Flowcover3.png',
+    img: '../../assets/flowsection/Flowcover3.png',
     children: <AddIcon />
   }
 ];
