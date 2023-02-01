@@ -5,6 +5,8 @@ import signin from './login.module.css';
 import { AllContext } from '../../useContext/interface';
 import { DataContext } from '../../useContext';
 import ButtonLoader from '../Loader/buttonLoader';
+import config from '../../utils/config/config';
+
 const Login = (props: { openModal: any; openForgotModal: any }) => {
   const initialData: any = {
     email: '',
@@ -37,7 +39,7 @@ const Login = (props: { openModal: any; openForgotModal: any }) => {
           <span className={signin.socialbtn}>
             <a
               className={signin.facebook}
-              href="https://localhost:7000/facebook"
+              href={`${config.VITE_SERVER_URL}/facebook`}
             >
               <span className={signin.icon}>
                 <TiSocialFacebook />
@@ -47,7 +49,7 @@ const Login = (props: { openModal: any; openForgotModal: any }) => {
           </span>
 
           <span className={signin.google}>
-            <a href="https://localhost:7000/auth/google">
+            <a href={`${config.VITE_SERVER_URL}/auth/google`}>
               <span className={signin.google_icon_text_container}>
                 <span className={signin.google_icon}>
                   <FcGoogle />

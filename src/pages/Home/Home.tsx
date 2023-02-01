@@ -1,23 +1,23 @@
 /* eslint-disable */
-import React, { useState, useReducer } from "react";
-import Find from "../Find/Find";
+import React, { useState, useReducer } from 'react';
+import Find from '../Find/Find';
 // import Flow from "../Flow/Flow";
-import Footer from "../footer/footer";
-import Hero from "../Hero/Hero";
-import Listen from "../Listen/Listen";
-import Premium from "../Premium/Premium";
-import Modal from "../../Components/Modal/Modal";
-import LogoutNavbar from "../../Components/Navbar/LogoutNavbar/LogoutNavbar";
-import axios from "axios";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import PasswordRecover from "../../Components/RecoveryPage/PasswordRecover";
-import { useNavigate } from "react-router-dom";
-import Login from "../../Components/Login/Login";
-import ForgotPass from "../../Components/ForgotPass/ForgotPass";
-import Signup from "../../Components/Signup/Signup";
-import homecss from "./Home.module.css";
-import Loading from "../../Components/Loader/Loading";
+import Footer from '../footer/footer';
+import Hero from '../Hero/Hero';
+import Listen from '../Listen/Listen';
+import Premium from '../Premium/Premium';
+import Modal from '../../Components/Modal/Modal';
+import LogoutNavbar from '../../Components/Navbar/LogoutNavbar/LogoutNavbar';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import PasswordRecover from '../../Components/RecoveryPage/PasswordRecover';
+import { useNavigate } from 'react-router-dom';
+import Login from '../../Components/Login/Login';
+import ForgotPass from '../../Components/ForgotPass/ForgotPass';
+import Signup from '../../Components/Signup/Signup';
+import homecss from './Home.module.css';
+import Loading from '../../Components/Loader/Loading';
 
 const Home = () => {
   const [openSignUpModal, setopenSignUpModal] = useState<boolean>(false);
@@ -40,8 +40,8 @@ const Home = () => {
     if (e !== undefined) {
       e.preventDefault();
     }
-    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
-      navigate("/user-dashboard");
+    if (localStorage.getItem('token') || sessionStorage.getItem('token')) {
+      navigate('/user-dashboard');
     }
     setFormData({});
     setShowLoginModal(!showLoginModal);
@@ -55,17 +55,17 @@ const Home = () => {
   };
 
   function onChange(value: any) {
-    console.log("Captcha value:", value);
+    console.log('Captcha value:', value);
   }
 
   const resetModals = (e: any) => {
     if (e?.target?.attributes?.class) {
-      e?.target?.attributes.class.value === "Modal-Area"
+      e?.target?.attributes.class.value === 'Modal-Area'
         ? [
             setShowLoginModal(false),
             setopenSignUpModal(false),
             setShowRecoveryModal(false),
-            setShowForgotModal(false),
+            setShowForgotModal(false)
           ]
         : null;
     }
@@ -75,31 +75,31 @@ const Home = () => {
     e.preventDefault();
     try {
       await axios
-        .post("https://localhost:7000/api/user/resetpassword", {
-          email: frgtPwdMail,
+        .post('`${VITE_SERVER_URL}/api/user/resetpassword', {
+          email: frgtPwdMail
         })
         .then((res) => {
-          toast(res.data.message, { toastId: "fgt pwd success" });
+          toast(res.data.message, { toastId: 'fgt pwd success' });
         });
     } catch (err: any) {
       console.log(err);
-      if (err.message === "Network Error") {
-        return toast.error("Network error", { toastId: "fgt pwd err" });
+      if (err.message === 'Network Error') {
+        return toast.error('Network error', { toastId: 'fgt pwd err' });
       }
-      toast.error(err.response.data.error, { toastId: "fgt pwd err2" });
+      toast.error(err.response.data.error, { toastId: 'fgt pwd err2' });
     }
   };
 
   const toggleSignupSiginModal = (e: any) => {
-    e === "Log in" ? openLoginModal() : null;
-    e === "Sign up" ? setopenSignUpModal(true) : null;
+    e === 'Log in' ? openLoginModal() : null;
+    e === 'Sign up' ? setopenSignUpModal(true) : null;
   };
   setTimeout(() => {
     setLoading(() => false);
   }, 2000);
   return (
     <React.Fragment>
-      {loading && <Loading />}{" "}
+      {loading && <Loading />}{' '}
       {!loading && (
         <div className={homecss.home_container}>
           <LogoutNavbar toggleLoginBtn={toggleSignupSiginModal} />

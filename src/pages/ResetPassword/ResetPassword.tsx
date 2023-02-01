@@ -33,7 +33,7 @@ const ResetPasswordPage = () => {
 			} else {
 				// send email to the route
 				await axios
-					.post(`https://localhost:7000/api/user/changepassword`, {
+					.post(``${VITE_SERVER_URL}/api/user/changepassword`, {
 						password,
 						token,
 					})

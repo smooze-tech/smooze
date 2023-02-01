@@ -10,6 +10,7 @@ import { apiPost } from "../../utils/api";
 import { DataContext } from "../../useContext";
 import { AllContext } from "../../useContext/interface";
 import { Link, useNavigate } from 'react-router-dom';
+import config from "../../utils/config/config";
 
 const PaymentMethod = () => {
   const [email, setEmail] = useState("");
@@ -26,7 +27,7 @@ const PaymentMethod = () => {
     // const paystackkey = process.env.REACT_PAYSTACK_PUBLIC_KEY;
     const paystack = new PaystackPop();
     paystack.newTransaction({
-      key: "pk_test_322289048761c90037ae2131d5581a484d6bcda6",
+      key: config.VITE_PAYMENT_KEY,
       amount: 1500 * 100,
       email,
       firstName,
@@ -35,29 +36,26 @@ const PaymentMethod = () => {
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         const message = `Payment complete successfully ${transaction.reference}`;
         toast.success(message);
-        navigate("/user-dashboard")
+        navigate('/user-dashboard');
 
-        
-
-        setEmail("");
-        setAmount("");
-        setFirstName("");
-        setLastName("");
+        setEmail('');
+        setAmount('');
+        setFirstName('');
+        setLastName('');
         const data = {
-          paystackResponse: "success",
-          transactionref: transaction.reference,
+          paystackResponse: 'success',
+          transactionref: transaction.reference
         };
 
-        const res = await apiPost("/api/user/paystack-response", data);
+        const res = await apiPost('/api/user/paystack-response', data);
         if (res.status === 200) {
-          toast.success("Payment successful");
-          localStorage.setItem("token", res.data.signature);
+          toast.success('Payment successful');
+          localStorage.setItem('token', res.data.signature);
           await getUser();
-          window.location.href = "/user-dashboard";
-
+          window.location.href = '/user-dashboard';
         }
       },
-      onCancel() {},
+      onCancel() {}
     });
   };
 

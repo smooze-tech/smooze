@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import config from "../../utils/config/config";
 
 const Verify = () => {
 	const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Verify = () => {
 				if (token === undefined || token === null)
 					return toast.error("Unauthorized", { toastId: "verify unauth" });
 				await axios
-					.patch(`https://localhost:7000/api/user/verify?token=${token}`)
+					.patch(`${config.VITE_SERVER_URL}/api/user/verify?token=${token}`)
 					.then((res) => {
 						toast.success(res.data.message, { toastId: "verify" });
 						setTimeout(() => navigate("/"), 2000);

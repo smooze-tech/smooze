@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseUrl = 'https://localhost:7000';
+const baseUrl = '`${VITE_SERVER_URL}';
 const getToken = () => {
   return localStorage.getItem('token') || sessionStorage.getItem('token');
 };
