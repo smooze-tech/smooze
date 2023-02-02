@@ -81,7 +81,7 @@ const PlayBar = () => {
       }
     }
     if (songs.length > 0) {
-      modifyCurrentlyPlaying(songs);
+      // modifyCurrentlyPlaying(songs);
     }
 
     window.addEventListener('resize', handleResize);
